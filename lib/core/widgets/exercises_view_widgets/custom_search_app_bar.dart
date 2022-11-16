@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study_case/core/widgets/exercises_view_widgets/filter_continer.dart';
+import 'package:provider/provider.dart';
 
 import '../../../view_model/exercises_view_model.dart';
+import '../../helper/modal_sheet.dart';
+import 'filter_type_button.dart';
 
 class CustomSearchAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -30,13 +34,21 @@ class CustomSearchAppBar extends StatelessWidget
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 10),
-          child: CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Center(
-              child: SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Image.asset("assets/icon/filter.png")),
+          child: InkWell(
+            onTap: () => bottomSheet(
+                context,
+                viewModel,
+                FilterContainer(
+                  model: viewModel,
+                )),
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                child: SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: Image.asset("assets/icon/filter.png")),
+              ),
             ),
           ),
         )

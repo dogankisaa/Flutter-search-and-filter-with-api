@@ -18,57 +18,59 @@ class ExercisesView extends StatelessWidget {
             appBar: CustomSearchAppBar(
               viewModel: viewModel,
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Consumer<ExercisesViewModel>(
-                builder: (context, value, child) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: List.generate(
-                          viewModel.filteredName.length != 0
-                              ? viewModel.filteredName.length
-                              : viewModel.name.length, (index) {
-                        return Consumer<ExercisesViewModel>(
-                          builder: (context, value, child) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Container(
-                                width: double.infinity,
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 20, top: 20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        viewModel.filteredName.length != 0
-                                            ? viewModel.filteredName[index]
-                                            : viewModel.name[index],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5!
-                                            .copyWith(color: Colors.grey),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
-                      }),
-                    ),
-                  );
-                },
-              ),
-            ));
+            body: exerciseListCard(viewModel));
       },
+    );
+  }
+
+  Padding exerciseListCard(ExercisesViewModel viewModel) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Consumer<ExercisesViewModel>(
+        builder: (context, value, child) {
+          return SingleChildScrollView(
+            child: Column(
+              children: List.generate(
+                  viewModel.filteredName.length != 0
+                      ? viewModel.filteredName.length
+                      : viewModel.name.length, (index) {
+                return Consumer<ExercisesViewModel>(
+                  builder: (context, value, child) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                viewModel.filteredName.length != 0
+                                    ? viewModel.filteredName[index]
+                                    : viewModel.name[index],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline5!
+                                    .copyWith(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
