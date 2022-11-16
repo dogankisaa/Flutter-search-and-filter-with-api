@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study_case/core/service/get_exercises.dart';
 import 'package:flutter_study_case/view_model/exercises_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,10 @@ class ExercisesView extends StatelessWidget {
         return Scaffold(
           appBar: CustomSearchAppBar(
             viewModel: viewModel,
+          ),
+          body: IconButton(
+            onPressed: () => GetExercises().getExercises(),
+            icon: Icon(Icons.abc),
           ),
         );
       },
