@@ -14,8 +14,9 @@ class CustomSearchAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: 90,
-      title: TextField(
-        onChanged: (value) => viewModel.deneme(),
+      title: TextFormField(
+        controller: viewModel.searchInputController,
+        onEditingComplete: () => viewModel.searchExercise(),
         decoration: InputDecoration(
           hintText: "Search",
           contentPadding: EdgeInsets.only(left: 30.0),

@@ -1,17 +1,16 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_study_case/core/service/http_service.dart';
 import 'package:flutter_study_case/model/exercise_model.dart';
 
 class GetExercises {
-  getExercises() async {
+  Future getExercises() async {
     HttpService http = HttpService();
     Response? response;
-    try {
-      response = await http.getRequest("/v1/exercises");
-    } on DioError catch (e) {
-      print(e.message);
-    }
 
-    print(response!.data);
+    response = await http.getRequest("/v1/exercises");
+
+    return response.data;
   }
 }
