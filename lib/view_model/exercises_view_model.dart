@@ -43,23 +43,20 @@ class ExercisesViewModel extends BaseViewModel {
     "stretching",
     "strongman",
   ];
-  String typeFilterDropdownValue = "Choose";
-  String muscleFilterDropDownValue = "Choose a Muscle";
+
   @override
-  List exercises = [];
   Future<void> init() async {
     fetchExercise();
   }
 
   searchExercise() async {
     clearFilteredLists();
-    print(filteredName);
+
     searchInputController.text.split(" ").forEach((word) {
       filteredName.addAll(name.where((element) => element.contains(word)));
       filteredName = filteredName.toSet().toList();
       for (int i = 0; i < name.length; i++) {
         if (name[i].contains(word)) {
-          print("girdi");
           filteredMuscle.add(muscle[i]);
           filteredType.add(type[i]);
         }
@@ -85,7 +82,7 @@ class ExercisesViewModel extends BaseViewModel {
     clearFilteredLists();
     filteredExerciseList =
         await GetFilteredExercises().getFilteredExercises(type, detail);
-    print(filteredExerciseList);
+
     for (int i = 0; i < filteredExerciseList.length; i++) {
       filteredName.add(filteredExerciseList[i]["name"]);
       filteredType.add(filteredExerciseList[i]["type"]);
@@ -93,15 +90,6 @@ class ExercisesViewModel extends BaseViewModel {
     }
     Navigator.pop(context);
     searchInputController.clear();
-    notifyListeners();
-  }
-
-  setFilterDropDownValue(String type, String value) {
-    print(typeFilterDropdownValue);
-    type == "type"
-        ? typeFilterDropdownValue = value
-        : muscleFilterDropDownValue = value;
-    print(typeFilterDropdownValue);
     notifyListeners();
   }
 

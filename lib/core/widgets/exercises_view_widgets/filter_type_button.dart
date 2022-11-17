@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_case/core/helper/modal_sheet.dart';
-import 'package:flutter_study_case/core/widgets/exercises_view_widgets/filter_continer.dart';
 
 import '../../../view_model/exercises_view_model.dart';
 import 'filter_type_drop_down.dart';

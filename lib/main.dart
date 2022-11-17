@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeData(),
-      home: ExercisesView(),
+      home: const ExercisesView(),
     );
   }
 }

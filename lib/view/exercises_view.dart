@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_study_case/core/const/exercise_view_consts.dart';
 import 'package:flutter_study_case/core/service/get_exercises.dart';
 import 'package:flutter_study_case/view_model/exercises_view_model.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class ExercisesView extends StatelessWidget {
 
   Padding exerciseListCard(ExercisesViewModel viewModel) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: ExerciseViewConsts().screenPadding,
       child: Consumer<ExercisesViewModel>(
         builder: (context, value, child) {
           return FutureBuilder(
@@ -37,34 +38,32 @@ class ExercisesView extends StatelessWidget {
                     children: [
                       Text(
                         viewModel.filteredName.isNotEmpty
-                            ? viewModel.filteredName.length.toString() +
-                                " results found."
-                            : viewModel.name.length.toString() +
-                                " results found.",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: Colors.grey),
+                            ? "${viewModel.filteredName.length}"
+                                " ${ExerciseViewConsts().resultCount}"
+                            : "${viewModel.name.length} "
+                                "${ExerciseViewConsts().resultCount}",
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                            color: ExerciseViewConsts().generalGreyColor),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 14,
                       ),
                       Column(
                         children: List.generate(
-                            viewModel.filteredName.length != 0
+                            viewModel.filteredName.isNotEmpty
                                 ? viewModel.filteredName.length
                                 : viewModel.name.length, (index) {
                           return Consumer<ExercisesViewModel>(
                             builder: (context, value, child) {
                               return Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
+                                padding: ExerciseViewConsts().cardBottomPadding,
                                 child: Container(
                                   width: double.infinity,
-                                  height: 200,
+                                  height: ExerciseViewConsts().cardHeight,
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                      color: Colors.white,
+                                      borderRadius:
+                                          ExerciseViewConsts().cardRadius),
                                   child: Padding(
                                     padding: const EdgeInsets.all(20),
                                     child: Column(
@@ -80,7 +79,9 @@ class ExercisesView extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline5!
-                                              .copyWith(color: Colors.grey),
+                                              .copyWith(
+                                                  color: ExerciseViewConsts()
+                                                      .generalGreyColor),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
@@ -89,7 +90,7 @@ class ExercisesView extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(50)),
                                           child: Padding(
-                                            padding: EdgeInsets.all(10),
+                                            padding: const EdgeInsets.all(10),
                                             child: Text(
                                               viewModel.filteredType.isNotEmpty
                                                   ? viewModel
@@ -97,8 +98,9 @@ class ExercisesView extends StatelessWidget {
                                                       .toString()
                                                   : viewModel.type[index]
                                                       .toString(),
-                                              style:
-                                                  TextStyle(color: Colors.grey),
+                                              style: TextStyle(
+                                                  color: ExerciseViewConsts()
+                                                      .generalGreyColor),
                                             ),
                                           ),
                                         ),
@@ -109,7 +111,9 @@ class ExercisesView extends StatelessWidget {
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!
-                                              .copyWith(color: Colors.grey),
+                                              .copyWith(
+                                                  color: ExerciseViewConsts()
+                                                      .generalGreyColor),
                                         ),
                                       ],
                                     ),

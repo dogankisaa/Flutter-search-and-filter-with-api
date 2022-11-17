@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_study_case/core/widgets/exercises_view_widgets/filter_continer.dart';
-import 'package:provider/provider.dart';
 
 import '../../../view_model/exercises_view_model.dart';
 import '../../helper/modal_sheet.dart';
-import 'filter_type_button.dart';
 
 class CustomSearchAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -13,6 +11,7 @@ class CustomSearchAppBar extends StatelessWidget
     Key? key,
     required this.viewModel,
   }) : super(key: key);
+  @override
   Size get preferredSize => const Size.fromHeight(90);
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class CustomSearchAppBar extends StatelessWidget
         onEditingComplete: () => viewModel.searchExercise(),
         decoration: InputDecoration(
           hintText: "Search",
-          contentPadding: EdgeInsets.only(left: 30.0),
+          contentPadding: const EdgeInsets.only(left: 30.0),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(50.0),
               borderSide: BorderSide.none),

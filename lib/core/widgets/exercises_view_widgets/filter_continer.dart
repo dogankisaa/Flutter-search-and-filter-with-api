@@ -21,7 +21,7 @@ class FilterContainer extends StatelessWidget {
               viewModel: model,
               title: "muscle",
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             FilterTypeButton(
