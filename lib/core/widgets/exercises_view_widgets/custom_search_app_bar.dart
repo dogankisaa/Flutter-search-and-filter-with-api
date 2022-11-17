@@ -34,6 +34,20 @@ class CustomSearchAppBar extends StatelessWidget
         Padding(
           padding: const EdgeInsets.only(right: 10),
           child: InkWell(
+            onTap: () => viewModel.clearFilteredLists(),
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Center(
+                  child: Icon(
+                Icons.close,
+                color: Colors.black,
+              )),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: InkWell(
             onTap: () => bottomSheet(
                 context,
                 viewModel,
