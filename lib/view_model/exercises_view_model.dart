@@ -52,13 +52,21 @@ class ExercisesViewModel extends BaseViewModel {
   }
 
   searchExercise() async {
+    clearFilteredLists();
     print(filteredName);
     searchInputController.text.split(" ").forEach((word) {
       filteredName.addAll(name.where((element) => element.contains(word)));
       filteredName = filteredName.toSet().toList();
+      for (int i = 0; i < name.length; i++) {
+        if (name[i].contains(word)) {
+          print("girdi");
+          filteredMuscle.add(muscle[i]);
+          filteredType.add(type[i]);
+        }
+      }
     });
 
-    searchInputController.text.length == 0 ?? filteredName.clear();
+    searchInputController.text.isNotEmpty ?? filteredName.clear();
     notifyListeners();
   }
 
@@ -67,20 +75,24 @@ class ExercisesViewModel extends BaseViewModel {
     for (int i = 0; i < exerciseList.length; i++) {
       name.add(exerciseList[i]["name"]);
       type.add(exerciseList[i]["type"]);
+      muscle.add(exerciseList[i]["muscle"]);
     }
 
     notifyListeners();
   }
 
   changeFilterStatus(String type, BuildContext context, String detail) async {
+    clearFilteredLists();
     filteredExerciseList =
         await GetFilteredExercises().getFilteredExercises(type, detail);
     print(filteredExerciseList);
     for (int i = 0; i < filteredExerciseList.length; i++) {
       filteredName.add(filteredExerciseList[i]["name"]);
       filteredType.add(filteredExerciseList[i]["type"]);
+      filteredMuscle.add(filteredExerciseList[i]["muscle"]);
     }
     Navigator.pop(context);
+    searchInputController.clear();
     notifyListeners();
   }
 
@@ -90,6 +102,13 @@ class ExercisesViewModel extends BaseViewModel {
         ? typeFilterDropdownValue = value
         : muscleFilterDropDownValue = value;
     print(typeFilterDropdownValue);
+    notifyListeners();
+  }
+
+  clearFilteredLists() {
+    filteredMuscle.clear();
+    filteredName.clear();
+    filteredType.clear();
     notifyListeners();
   }
 }
